@@ -2,7 +2,7 @@
 // @name           covconv
 // @namespace      net.ghippos.covconv
 // @description    いまｱｯｼｭﾋｮｰｸいるんだけどっいけそうならいこうっ！
-// @version        2
+// @version        3
 // @include        *
 // @grant          none
 // ==/UserScript==
@@ -581,10 +581,10 @@
       'ja_JP': '([ァ-ヶ])ング',
       'kv_JP': '$1ﾝｯ'
     },
-    /*{
-      'ja_JP': '([ァ-ヶ])ー([ァ-ヶ])',
-      'kv_JP': '$1-$2'
-    },*/
+    {
+      'ja_JP': '([ァ-ヶ])ー',
+      'kv_JP': '$1-'
+    },
     {
       'ja_JP': '(、|，|。|．)',
       'kv_JP': 'っ'
@@ -592,10 +592,11 @@
   ]; 
   // end of dic[]
   
-  var fullKana = new Array('ヴ', 'ガ', 'ギ', 'グ', 'ゲ', 'ゴ', 'ザ', 'ジ', 'ズ', 'ゼ', 'ゾ', 'ダ', 'ヂ', 'ヅ', 'デ', 'ド', 'バ', 'ビ', 'ブ', 'ベ', 'ボ', 'パ', 'ピ', 'プ', 'ペ', 'ポ', 'ヲ', 'ァ', 'ィ', 'ゥ', 'ェ', 'ォ', 'ャ', 'ュ', 'ョ', 'ッ', 'ー', 'ア', 'イ', 'ウ', 'エ', 'オ', 'カ', 'キ', 'ク', 'ケ', 'コ', 'サ', 'シ', 'ス', 'セ', 'ソ', 'タ', 'チ', 'ツ', 'テ', 'ト', 'ナ', 'ニ', 'ヌ', 'ネ', 'ノ', 'ハ', 'ヒ', 'フ', 'ヘ', 'ホ', 'マ', 'ミ', 'ム', 'メ', 'モ', 'ヤ', 'ユ', 'ヨ', 'ラ', 'リ', 'ル', 'レ', 'ロ', 'ワ', 'ン');
-  var halfKana = new Array('ｳﾞ', 'ｶﾞ', 'ｷﾞ', 'ｸﾞ', 'ｹﾞ', 'ｺﾞ', 'ｻﾞ', 'ｼﾞ', 'ｽﾞ', 'ｾﾞ', 'ｿﾞ', 'ﾀﾞ', 'ﾁﾞ', 'ﾂﾞ', 'ﾃﾞ', 'ﾄﾞ', 'ﾊﾞ', 'ﾋﾞ', 'ﾌﾞ', 'ﾍﾞ', 'ﾎﾞ', 'ﾊﾟ', 'ﾋﾟ', 'ﾌﾟ', 'ﾍﾟ', 'ﾎﾟ', 'ｦ', 'ｧ', 'ｨ', 'ｩ', 'ｪ', 'ｫ', 'ｬ', 'ｭ', 'ｮ', 'ｯ', 'ｰ', 'ｱ', 'ｲ', 'ｳ', 'ｴ', 'ｵ', 'ｶ', 'ｷ', 'ｸ', 'ｹ', 'ｺ', 'ｻ', 'ｼ', 'ｽ', 'ｾ', 'ｿ', 'ﾀ', 'ﾁ', 'ﾂ', 'ﾃ', 'ﾄ', 'ﾅ', 'ﾆ', 'ﾇ', 'ﾈ', 'ﾉ', 'ﾊ', 'ﾋ', 'ﾌ', 'ﾍ', 'ﾎ', 'ﾏ', 'ﾐ', 'ﾑ', 'ﾒ', 'ﾓ', 'ﾔ', 'ﾕ', 'ﾖ', 'ﾗ', 'ﾘ', 'ﾙ', 'ﾚ', 'ﾛ', 'ﾜ', 'ﾝ');
+  var fullKana = new Array('ヴ', 'ガ', 'ギ', 'グ', 'ゲ', 'ゴ', 'ザ', 'ジ', 'ズ', 'ゼ', 'ゾ', 'ダ', 'ヂ', 'ヅ', 'デ', 'ド', 'バ', 'ビ', 'ブ', 'ベ', 'ボ', 'パ', 'ピ', 'プ', 'ペ', 'ポ', 'ヲ', 'ァ', 'ィ', 'ゥ', 'ェ', 'ォ', 'ャ', 'ュ', 'ョ', 'ッ', 'ア', 'イ', 'ウ', 'エ', 'オ', 'カ', 'キ', 'ク', 'ケ', 'コ', 'サ', 'シ', 'ス', 'セ', 'ソ', 'タ', 'チ', 'ツ', 'テ', 'ト', 'ナ', 'ニ', 'ヌ', 'ネ', 'ノ', 'ハ', 'ヒ', 'フ', 'ヘ', 'ホ', 'マ', 'ミ', 'ム', 'メ', 'モ', 'ヤ', 'ユ', 'ヨ', 'ラ', 'リ', 'ル', 'レ', 'ロ', 'ワ', 'ン');
+  var halfKana = new Array('ｳﾞ', 'ｶﾞ', 'ｷﾞ', 'ｸﾞ', 'ｹﾞ', 'ｺﾞ', 'ｻﾞ', 'ｼﾞ', 'ｽﾞ', 'ｾﾞ', 'ｿﾞ', 'ﾀﾞ', 'ﾁﾞ', 'ﾂﾞ', 'ﾃﾞ', 'ﾄﾞ', 'ﾊﾞ', 'ﾋﾞ', 'ﾌﾞ', 'ﾍﾞ', 'ﾎﾞ', 'ﾊﾟ', 'ﾋﾟ', 'ﾌﾟ', 'ﾍﾟ', 'ﾎﾟ', 'ｦ', 'ｧ', 'ｨ', 'ｩ', 'ｪ', 'ｫ', 'ｬ', 'ｭ', 'ｮ', 'ｯ', 'ｱ', 'ｲ', 'ｳ', 'ｴ', 'ｵ', 'ｶ', 'ｷ', 'ｸ', 'ｹ', 'ｺ', 'ｻ', 'ｼ', 'ｽ', 'ｾ', 'ｿ', 'ﾀ', 'ﾁ', 'ﾂ', 'ﾃ', 'ﾄ', 'ﾅ', 'ﾆ', 'ﾇ', 'ﾈ', 'ﾉ', 'ﾊ', 'ﾋ', 'ﾌ', 'ﾍ', 'ﾎ', 'ﾏ', 'ﾐ', 'ﾑ', 'ﾒ', 'ﾓ', 'ﾔ', 'ﾕ', 'ﾖ', 'ﾗ', 'ﾘ', 'ﾙ', 'ﾚ', 'ﾛ', 'ﾜ', 'ﾝ');
   
-  var regex = [];
+  var regex_covconv = [];
+  var regex_kana = [];
   
   function covconv(element) {
     convert(element);
@@ -624,9 +625,9 @@
     }
   
     var nodeValue = element.nodeValue;
-    for (var i = 0; i < regex.length; i++) {
-      if (nodeValue.match(regex[i])) {
-        nodeValue = nodeValue.replace(regex[i], dic[i].kv_JP);
+    for (var i = 0; i < regex_covconv.length; i++) {
+      if (nodeValue.match(regex_covconv[i])) {
+        nodeValue = nodeValue.replace(regex_covconv[i], dic[i].kv_JP);
       }
     }
     nodeValue = toHalfWidth(nodeValue);
@@ -635,16 +636,18 @@
   
   function toHalfWidth(nodeValue) {
     var str = nodeValue;
-    for (var i = 0; i < fullKana.length; i++) {
-      var re = new RegExp(fullKana[i], 'gmi');
-      str = str.replace(re, halfKana[i]);
+    for (var i = 0; i < regex_kana.length; i++) {
+      str = str.replace(regex_kana[i], halfKana[i]);
     }
     return str;
   }
   
   // start 
   for (var i = 0; i < dic.length; i++) {
-    regex[i] = new RegExp(dic[i].ja_JP, 'gmi');
+    regex_covconv[i] = new RegExp(dic[i].ja_JP, 'gmi');
+  }
+  for (var i = 0; i < fullKana.length; i++) {
+    regex_kana[i] = new RegExp(fullKana[i], 'gmi');
   }
   covconv(window.document);
 }) ();
