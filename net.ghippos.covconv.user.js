@@ -2,7 +2,7 @@
 // @name           covconv
 // @namespace      net.ghippos.covconv
 // @description    いまｱｯｼｭﾋｮｰｸいるんだけどっいけそうならいこうっ！
-// @version        3
+// @version        4
 // @include        *
 // @grant          none
 // ==/UserScript==
@@ -554,8 +554,8 @@
       'kv_JP': 'ｱﾖ'
     },
     {
-      'ja_JP': '([ァ-ヶ])(ト|ド|ゴ|テ)',
-      'kv_JP': '$1ﾖ'
+      'ja_JP': '([ァ-ヶ])(ト|ド|ゴ|テ)([^ァィゥェォ])',
+      'kv_JP': '$1ﾖ$3'
     },
     {
       'ja_JP': '([ァ-ヶ])ース',
@@ -574,12 +574,12 @@
       'kv_JP': '$1ﾖ$2'
     },
     {
-      'ja_JP': '(リン)([ァ-ヶ])',
-      'kv_JP': '$1ﾎﾟ'
-    },
-    {
       'ja_JP': '([ァ-ヶ])ング',
       'kv_JP': '$1ﾝｯ'
+    },
+    {
+      'ja_JP': '(リン)([ァ-ヶ])',
+      'kv_JP': '$1ﾎﾟ'
     },
     {
       'ja_JP': '([ァ-ヶ])ー',
@@ -597,26 +597,12 @@
   
   var regex_covconv = [];
   var regex_kana = [];
-  
+    
   function covconv(element) {
     convert(element);
     for (var childElement of element.childNodes) {
       covconv(childElement);
     }
-  }
-  
-  function isTextElement(element){
-    if ('parentNode' in element && element.parentNode != null) {
-      var nodeName = element.parentNode.nodeName.toLowerCase();
-      if ((nodeName == 'style') || (nodeName == 'script') || (nodeName == 'frame')) {
-        return false; 
-      }
-    }
-    if (element.nodeName.toLowerCase() != '#text') {
-      return false;
-    }
-    
-    return true;
   }
   
   function convert(element) {
@@ -632,6 +618,20 @@
     }
     nodeValue = toHalfWidth(nodeValue);
     element.nodeValue = nodeValue;
+  }
+  
+  function isTextElement(element){
+    if ('parentNode' in element && element.parentNode != null) {
+      var nodeName = element.parentNode.nodeName.toLowerCase();
+      if ((nodeName == 'style') || (nodeName == 'script') || (nodeName == 'frame')) {
+        return false; 
+      }
+    }
+    if (element.nodeName.toLowerCase() != '#text') {
+      return false;
+    }
+    
+    return true;
   }
   
   function toHalfWidth(nodeValue) {
